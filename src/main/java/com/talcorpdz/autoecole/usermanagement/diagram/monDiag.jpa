@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jpa:entity-mappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:java="http://jcp.org/en/jsr/detail?id=270" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jpa="http://java.sun.com/xml/ns/persistence/orm" pkg="entity" v="4.2.4" rws="_1499858965290115" Pws="_1499858965290115" cws="_1499858965290115" sm="true" smpkg="meta" xs="true" id="_149985896522199" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm orm_2_1.xsd">
+    <jpa:entity compositePrimaryKeyClass="ImagePK" abs="false" class="Image" v="true" gen="false" xre="false" m="false" rootElement="_149985896522199" id="_1499858965237100">
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="extension" ft="false" id="_1499858965237102"/>
+            <jpa:basic optional="false" attribute-type="byte[]" v="true" name="image" ft="false" id="_1499858965237103">
+                <jpa:lob/>
+            </jpa:basic>
+            <jpa:id attribute-type="Long" v="true" name="id" ft="false" id="_1499858965237101">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="UserInfoPK" abs="false" class="UserInfo" v="true" jbn="false" xre="false" m="false" rootElement="_149985896522199" id="_1499858965252104">
+        <jpa:ts e="true">
+            <jpa:a>_1499858965252106</jpa:a>
+            <jpa:a>_1499858965252107</jpa:a>
+            <jpa:a>_1499858965252108</jpa:a>
+            <jpa:a>_1499858965252109</jpa:a>
+            <jpa:a>_1499859111386120</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_1499858965252105</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_1499858965252105</jpa:a>
+        </jpa:eq>
+        <jpa:inf e="true" n="java.io.Serializable"/>
+        <jpa:ath>Taleb Mohammed Housseyn</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="nom" ft="false" id="_1499858965252106"/>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="prenom" ft="false" id="_1499858965252107"/>
+            <jpa:basic optional="false" attribute-type="java.time.LocalDate" v="true" name="dateNaissance" ft="false" id="_1499858965252108"/>
+            <jpa:one-to-one own="true" orp="false" optional="false" primaryKey="false" connected-entity-id="_1499858965237100" v="true" name="image" id="_1499859111386120"/>
+            <jpa:element-collection target-class="java.lang.String" collection-type="java.util.List" v="true" name="telephones" ft="false" id="_1499858965252109">
+                <jpa:ob>
+                    <jpa:a/>
+                </jpa:ob>
+            </jpa:element-collection>
+            <jpa:id attribute-type="Long" v="true" name="id" ft="false" id="_1499858965252105">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="true" name="UserInfo.findAll">
+            <jpa:query>Select e from UserInfo e</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="UserInfo.findByDateNaissance">
+            <jpa:query>Select e from UserInfo e where e.dateNaissance = :dateNaisance </jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="UserInfo.findByFullNAme">
+            <jpa:query>Select e from UserInfo e WHERE e.nom = :nom AND e.prenom = :prenom</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="UserInfo.findByPhone">
+            <jpa:query>Select e from UserInfo e WHERE e.telephones = :telephone</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:entity compositePrimaryKeyClass="AccountPK" abs="false" class="Account" v="true" jbn="false" xre="false" m="false" rootElement="_149985896522199" id="_1499858965274110">
+        <jpa:ts e="true">
+            <jpa:a>_1499858965274112</jpa:a>
+            <jpa:a>_1499858965274113</jpa:a>
+            <jpa:a>_1499858965274114</jpa:a>
+        </jpa:ts>
+        <jpa:hc e="true">
+            <jpa:a>_1499858965274111</jpa:a>
+        </jpa:hc>
+        <jpa:eq e="true">
+            <jpa:a>_1499858965274111</jpa:a>
+        </jpa:eq>
+        <jpa:ath>Taleb Mohammed Housseyn</jpa:ath>
+        <jpa:attributes>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="username" ft="false" id="_1499858965274112">
+                <jpa:bv>
+                    <jpa:si mi="5" ma="30" m="votre nom d'utilisateur dois etre compris en 5 et 30 caractÃ¨re"/>
+                    <jpa:nn m="Veuillez saisir un nom d utilisateur"/>
+                </jpa:bv>
+                <jpa:column unique="true" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:basic optional="false" attribute-type="String" v="true" name="password" ft="false" id="_1499858965274113">
+                <jpa:bv>
+                    <jpa:si mi="6" ma="30" m="votre mot de passe doit etre compris entre 6 et 30 caractere"/>
+                    <jpa:nn m="veuillez saisir le mot de passe"/>
+                </jpa:bv>
+                <jpa:column unique="false" nullable="false" insertable="true" updatable="true"/>
+            </jpa:basic>
+            <jpa:one-to-one own="true" orp="false" optional="false" primaryKey="false" connected-entity-id="_1499858965252104" v="true" name="userInfo" ft="false" id="_1499858965274114"/>
+            <jpa:id attribute-type="Long" v="true" name="id" ft="false" id="_1499858965274111">
+                <jpa:generated-value strategy="AUTO"/>
+            </jpa:id>
+        </jpa:attributes>
+        <jpa:nq e="true" name="Account.findByUsername">
+            <jpa:query>Select e from Account e where e.username=:username</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Account.findByPassword">
+            <jpa:query>Select e from Account e where e.password=:password</jpa:query>
+        </jpa:nq>
+        <jpa:nq e="true" name="Account.Connect">
+            <jpa:query>Select e from Account e WHERE e.password = :password AND e.username = :username</jpa:query>
+        </jpa:nq>
+    </jpa:entity>
+    <jpa:snp loc="BEFORE_PACKAGE" e="true">/**
+ * This file was generated by the Jeddict
+ */</jpa:snp>
+    <jpa:c>
+        <ct>java.util.List</ct>
+        <ct>java.util.Set</ct>
+        <ct>java.util.Map</ct>
+        <ct>java.util.Collection</ct>
+    </jpa:c>
+    <jpa:wsl>
+        <jpa:ws n="Main" id="_1499858965290115">
+            <i ref="_1499858965274110" x="236" y="251"/>
+            <i ref="_1499858965237100" x="439" y="32"/>
+            <i ref="_1499858965252104" x="32" y="32"/>
+        </jpa:ws>
+    </jpa:wsl>
+</jpa:entity-mappings>

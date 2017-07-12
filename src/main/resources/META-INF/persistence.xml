@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+  <persistence-unit name="DEFAULT_PU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>entity.Account</class>
+    <class>entity.UserInfo</class>
+    <!-- Converters -->
+    <class>converters.LocalDateConverter</class>
+    <class>converters.LocalDateTimeConverter</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/auto_ecole?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="root"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="123456"/>
+      <property name="javax.persistence.schema-generation.database.action" value="create-or-extend-tables"/>
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
+    </properties>
+  </persistence-unit>
+</persistence>
