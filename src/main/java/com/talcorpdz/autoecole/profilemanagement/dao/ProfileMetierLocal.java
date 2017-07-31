@@ -13,7 +13,7 @@ import java.util.List;
  *
  * @author taleb
  */
-interface ProfileMetierLocal {
+public interface ProfileMetierLocal {
 
     public Long creerProfile(String nom, String prenom, LocalDate dateNaissance, List telephones);
 

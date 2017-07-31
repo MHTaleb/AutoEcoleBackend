@@ -16,12 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
-import javax.xml.bind.annotation.*;
 
-/**
- * @author Taleb Mohammed Housseyn
- */
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @NamedQueries({
     @NamedQuery(name = "UserInfo.findAll", query = "Select e from UserInfo e")
@@ -47,7 +42,7 @@ public class UserInfo implements Serializable {
     @OrderBy("")
     private List<String> telephones;
 
-    @OneToOne(optional = false, targetEntity = Image.class)
+    @OneToOne(targetEntity = Image.class)
     private Image image;
 
     public Long getId() {
@@ -96,33 +91,6 @@ public class UserInfo implements Serializable {
 
     public void setImage(Image image) {
         this.image = image;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!java.util.Objects.equals(getClass(), obj.getClass())) {
-            return false;
-        }
-        final UserInfo other = (UserInfo) obj;
-        if (!java.util.Objects.equals(this.getId(), other.getId())) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "UserInfo{" + " nom=" + nom + ", prenom=" + prenom + ", dateNaissance=" + dateNaissance + ", telephones=" + telephones + ", image=" + image + '}';
     }
 
 }

@@ -14,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import entity.Account;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -23,7 +24,7 @@ public class AccountMetier extends AccountJpaController implements AccountMetier
     private static final long serialVersionUID = -2478921792689770837L;
 
     public AccountMetier() {
-        super("DEFAULT_PU");
+        super(Persistence.createEntityManagerFactory("USER_PU"));
     }
 
     public AccountMetier(EntityManagerFactory emf) {

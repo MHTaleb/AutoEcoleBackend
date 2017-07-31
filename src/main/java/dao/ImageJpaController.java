@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.talcorpdz.autoecole.usermanagement.dao;
+package dao;
 
-import com.talcorpdz.autoecole.usermanagement.dao.exceptions.NonexistentEntityException;
-import entity.Account;
+import dao.exceptions.NonexistentEntityException;
+import entity.Image;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -18,23 +18,23 @@ import javax.persistence.EntityNotFoundException;
  *
  * @author taleb
  */
-public class AccountJpaController implements Serializable {
+ class ImageJpaController implements Serializable {
 
-    public AccountJpaController(EntityManagerFactory emf) {
+    public ImageJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    protected EntityManagerFactory emf = null;
+    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Account account) {
+    public void create(Image image) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(account);
+            em.persist(image);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -43,19 +43,19 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public void edit(Account account) throws NonexistentEntityException, Exception {
+    public void edit(Image image) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            account = em.merge(account);
+            image = em.merge(image);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = account.getId();
-                if (findAccount(id) == null) {
-                    throw new NonexistentEntityException("The account with id " + id + " no longer exists.");
+                Long id = image.getId();
+                if (findImage(id) == null) {
+                    throw new NonexistentEntityException("The image with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -71,14 +71,14 @@ public class AccountJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Account account;
+            Image image;
             try {
-                account = em.getReference(Account.class, id);
-                account.getId();
+                image = em.getReference(Image.class, id);
+                image.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The account with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The image with id " + id + " no longer exists.", enfe);
             }
-            em.remove(account);
+            em.remove(image);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -87,18 +87,18 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public List<Account> findAccountEntities() {
-        return findAccountEntities(true, -1, -1);
+    public List<Image> findImageEntities() {
+        return findImageEntities(true, -1, -1);
     }
 
-    public List<Account> findAccountEntities(int maxResults, int firstResult) {
-        return findAccountEntities(false, maxResults, firstResult);
+    public List<Image> findImageEntities(int maxResults, int firstResult) {
+        return findImageEntities(false, maxResults, firstResult);
     }
 
-    private List<Account> findAccountEntities(boolean all, int maxResults, int firstResult) {
+    private List<Image> findImageEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select object(o) from Account as o");
+            Query q = em.createQuery("select object(o) from Image as o");
             if (!all) {
                 q.setMaxResults(maxResults);
                 q.setFirstResult(firstResult);
@@ -109,19 +109,19 @@ public class AccountJpaController implements Serializable {
         }
     }
 
-    public Account findAccount(Long id) {
+    public Image findImage(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Account.class, id);
+            return em.find(Image.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getAccountCount() {
+    public int getImageCount() {
         EntityManager em = getEntityManager();
         try {
-            Query q = em.createQuery("select count(o) from Account as o");
+            Query q = em.createQuery("select count(o) from Image as o");
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();

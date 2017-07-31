@@ -31,7 +31,7 @@ public class ProfileMetier extends UserInfoJpaController implements ProfileMetie
     }
     
     public ProfileMetier() {
-        super(Persistence.createEntityManagerFactory("DEFAULT_PU"));
+        super(Persistence.createEntityManagerFactory("USER_PU"));
     }
 
     @Override
@@ -54,6 +54,12 @@ public class ProfileMetier extends UserInfoJpaController implements ProfileMetie
             UserInfo userInfo = rechercher(profilID);
             if (userInfo != null) {
                 account.setUserInfo(userInfo);
+                try {
+                   am.edit(account);
+                    
+                } catch (Exception ex) {
+                    Logger.getLogger(ProfileMetier.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 return true;
             }
         }

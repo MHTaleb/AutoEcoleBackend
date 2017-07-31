@@ -14,12 +14,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.*;
 
-/**
- * @author Taleb Mohammed Housseyn
- */
-@XmlAccessorType(XmlAccessType.FIELD)
 @Entity
 @NamedQueries({
     @NamedQuery(name = "Account.findByUsername", query = "Select e from Account e where e.username=:username")
@@ -33,7 +28,7 @@ public class Account {
 
     @Column(unique = true, nullable = false)
     @Basic(optional = false)
-    @Size(min = 5, max = 30, message = "votre nom d'utilisateur dois etre compris en 5 et 30 caractÃƒÂ¨re")
+    @Size(min = 5, max = 30, message = "votre nom d'utilisateur dois etre compris en 5 et 30 caractÃƒÆ’Ã‚Â¨re")
     @NotNull(message = "Veuillez saisir un nom d utilisateur")
     private String username;
 
@@ -43,7 +38,8 @@ public class Account {
     @NotNull(message = "veuillez saisir le mot de passe")
     private String password;
 
-    @OneToOne(optional = false, targetEntity = UserInfo.class)
+    
+    @OneToOne(targetEntity = UserInfo.class)
     private UserInfo userInfo;
 
     public Long getId() {
@@ -76,33 +72,6 @@ public class Account {
 
     public void setUserInfo(UserInfo userInfo) {
         this.userInfo = userInfo;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (!java.util.Objects.equals(getClass(), obj.getClass())) {
-            return false;
-        }
-        final Account other = (Account) obj;
-        if (!java.util.Objects.equals(this.getId(), other.getId())) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + (this.getId() != null ? this.getId().hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public String toString() {
-        return "Account{" + " username=" + username + ", password=" + password + ", userInfo=" + userInfo + '}';
     }
 
 }
